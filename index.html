@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Bank Transaction Register</title>
+
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 15px;
+    background: #eeeeee;
+    color: #111111;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    background: white;
+    padding: 15px;
+}
+
+
+/* =====================================================
+   EDITABLE HEADING
+===================================================== */
+
+.title-input {
+
+    display: block;
+
+    width: 100%;
+
+    height: 42px;
+
+    border: 1px solid #999999;
+
+    outline: none;
+
+    background: white;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #111111;
+
+    margin-bottom: 12px;
+
+    padding: 5px;
+}
+
+.title-input:focus {
+    border-color: #0d6efd;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+th,
+td {
+
+    border: 1px solid #222222;
+
+    padding: 5px;
+
+    font-size: 16px;
+
+    vertical-align: middle;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+th {
+
+    background: #ffff00;
+
+    color: #111111;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    height: 40px;
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   DATA ROWS - ALTERNATE COLOUR
+===================================================== */
+
+#tableBody tr:nth-child(odd) {
+
+    background-color: #ffffff;
+}
+
+#tableBody tr:nth-child(even) {
+
+    background-color: #eeeeee;
+}
+
+
+td {
+
+    min-height: 45px;
+
+    height: 45px;
+
+    vertical-align: middle;
+}
+
+
+/* =====================================================
+   COLUMN WIDTH
+===================================================== */
+
+th:nth-child(1),
+td:nth-child(1) {
+
+    width: 5%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+
+    width: 11%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+
+    width: 17%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+
+    width: 23%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+
+    width: 10%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+
+    width: 10%;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+
+    width: 11%;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+
+    width: 13%;
+}
+
+
+/* =====================================================
+   COMMON INPUT
+===================================================== */
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    color: #111111;
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+.date-input {
+
+    width: 100%;
+
+    height: 35px;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+
+/* Print date */
+
+.print-date {
+
+    display: none;
+}
+
+
+/* =====================================================
+   BANK
+===================================================== */
+
+.bank-select {
+
+    width: 100%;
+
+    height: 35px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.description-input {
+
+    width: 100%;
+
+    min-height: 35px;
+
+    height: 35px;
+
+    resize: none;
+
+    overflow: hidden;
+
+    display: block;
+
+    padding: 5px;
+
+    line-height: 1.3;
+
+    text-align: left;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   REMARKS
+===================================================== */
+
+.remarks-input {
+
+    width: 100%;
+
+    min-height: 35px;
+
+    height: 35px;
+
+    resize: none;
+
+    overflow: hidden;
+
+    display: block;
+
+    padding: 5px;
+
+    line-height: 1.3;
+
+    text-align: left;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   PRINT TEXT
+===================================================== */
+
+.print-text {
+
+    display: none;
+}
+
+
+/* =====================================================
+   DEPOSIT
+===================================================== */
+
+.deposit {
+
+    width: 100%;
+
+    height: 35px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #198754;
+
+    font-weight: bold;
+
+    text-align: right;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    appearance: textfield;
+
+    -webkit-appearance: none;
+
+    -moz-appearance: textfield;
+}
+
+
+/* Remove Chrome / Edge arrows */
+
+.deposit::-webkit-inner-spin-button,
+.deposit::-webkit-outer-spin-button {
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   WITHDRAWAL
+===================================================== */
+
+.withdrawal {
+
+    width: 100%;
+
+    height: 35px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #dc3545;
+
+    font-weight: bold;
+
+    text-align: right;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    appearance: textfield;
+
+    -webkit-appearance: none;
+
+    -moz-appearance: textfield;
+}
+
+
+/* Remove Chrome / Edge arrows */
+
+.withdrawal::-webkit-inner-spin-button,
+.withdrawal::-webkit-outer-spin-button {
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   DISABLED
+===================================================== */
+
+.deposit:disabled,
+.withdrawal:disabled {
+
+    background: rgba(200, 200, 200, 0.25);
+
+    color: #999999;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   BALANCE
+===================================================== */
+
+.balance-cell {
+
+    text-align: right;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    font-size: 16px;
+}
+
+.balance-positive {
+
+    color: #198754;
+}
+
+.balance-negative {
+
+    color: #dc3545;
+}
+
+.balance-zero {
+
+    color: #111111;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons {
+
+    text-align: center;
+
+    margin-top: 18px;
+}
+
+button {
+
+    border: none;
+
+    color: white;
+
+    padding: 10px 17px;
+
+    margin: 4px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.next-button {
+
+    background: #198754;
+}
+
+.pdf-button {
+
+    background: #dc3545;
+}
+
+.print-button {
+
+    background: #0d6efd;
+}
+
+.clear-button {
+
+    background: #6c757d;
+}
+
+button:hover {
+
+    opacity: 0.85;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 700px) {
+
+    body {
+
+        padding: 5px;
+    }
+
+    .container {
+
+        padding: 5px;
+    }
+
+    table {
+
+        min-width: 1100px;
+    }
+
+}
+
+
+/* =====================================================
+   A4 LANDSCAPE
+===================================================== */
+
+@page {
+
+    size: A4 landscape;
+
+    margin: 5mm;
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print {
+
+    body {
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: white !important;
+
+        font-family: Arial, sans-serif !important;
+
+        font-size: 16px !important;
+
+        -webkit-print-color-adjust: exact !important;
+
+        print-color-adjust: exact !important;
+    }
+
+
+    .container {
+
+        width: 100% !important;
+
+        max-width: none !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+    }
+
+
+    /* =================================================
+       EDITABLE HEADING
+    ================================================= */
+
+    .title-input {
+
+        width: 100% !important;
+
+        height: 32px !important;
+
+        border: none !important;
+
+        outline: none !important;
+
+        background: transparent !important;
+
+        text-align: center !important;
+
+        font-size: 22px !important;
+
+        font-weight: bold !important;
+
+        color: #111111 !important;
+
+        margin: 0 0 5px 0 !important;
+
+        padding: 0 !important;
+    }
+
+
+    /* Hide buttons */
+
+    .buttons {
+
+        display: none !important;
+    }
+
+
+    .table-wrapper {
+
+        overflow: visible !important;
+
+        width: 100% !important;
+    }
+
+
+    table {
+
+        width: 100% !important;
+
+        min-width: 0 !important;
+
+        table-layout: fixed !important;
+
+        border-collapse: collapse !important;
+    }
+
+
+    /* =================================================
+       HEADER PRINT
+    ================================================= */
+
+    th {
+
+        font-size: 16px !important;
+
+        height: 28px !important;
+
+        padding: 3px !important;
+
+        background: #ffff00 !important;
+
+        color: #111111 !important;
+
+        font-weight: bold !important;
+
+        -webkit-print-color-adjust: exact !important;
+
+        print-color-adjust: exact !important;
+    }
+
+
+    /* =================================================
+       DATA ROW PRINT
+    ================================================= */
+
+    td {
+
+        font-size: 16px !important;
+
+        padding: 4px !important;
+
+        height: auto !important;
+
+        min-height: 25px !important;
+
+        vertical-align: middle !important;
+
+        -webkit-print-color-adjust: exact !important;
+
+        print-color-adjust: exact !important;
+    }
+
+
+    /* =================================================
+       ALTERNATE ROW COLOURS PRINT
+    ================================================= */
+
+    #tableBody tr:nth-child(odd) {
+
+        background-color: #ffffff !important;
+
+        -webkit-print-color-adjust: exact !important;
+
+        print-color-adjust: exact !important;
+    }
+
+
+    #tableBody tr:nth-child(even) {
+
+        background-color: #eeeeee !important;
+
+        -webkit-print-color-adjust: exact !important;
+
+        print-color-adjust: exact !important;
+    }
+
+
+    /* =================================================
+       DATE
+       Original calendar input completely hidden
+    ================================================= */
+
+    .date-input {
+
+        display: none !important;
+
+        visibility: hidden !important;
+
+        opacity: 0 !important;
+
+        width: 0 !important;
+
+        height: 0 !important;
+
+        position: absolute !important;
+
+        pointer-events: none !important;
+    }
+
+
+    /* Printed date is plain text */
+
+    .print-date {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        text-align: center !important;
+
+        font-family: Arial, sans-serif !important;
+
+        font-size: 16px !important;
+
+        color: #111111 !important;
+
+        white-space: nowrap !important;
+
+        line-height: 1.2 !important;
+    }
+
+
+    /* =================================================
+       BANK DROPDOWN ARROW REMOVE
+    ================================================= */
+
+    .bank-select {
+
+        appearance: none !important;
+
+        -webkit-appearance: none !important;
+
+        -moz-appearance: none !important;
+
+        background: transparent !important;
+
+        background-image: none !important;
+
+        border: none !important;
+
+        outline: none !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        font-size: 16px !important;
+
+        font-family: Arial, sans-serif !important;
+
+        color: #111111 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* =================================================
+       DESCRIPTION INPUT HIDE
+    ================================================= */
+
+    .description-input {
+
+        display: none !important;
+
+        visibility: hidden !important;
+    }
+
+
+    /* =================================================
+       REMARKS INPUT HIDE
+    ================================================= */
+
+    .remarks-input {
+
+        display: none !important;
+
+        visibility: hidden !important;
+    }
+
+
+    /* =================================================
+       FULL DESCRIPTION / REMARKS
+    ================================================= */
+
+    .print-text {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        min-height: 20px !important;
+
+        max-height: none !important;
+
+        overflow: visible !important;
+
+        white-space: pre-wrap !important;
+
+        overflow-wrap: anywhere !important;
+
+        word-break: break-word !important;
+
+        line-height: 1.25 !important;
+
+        padding: 1px !important;
+
+        margin: 0 !important;
+
+        color: #111111 !important;
+
+        text-align: left !important;
+
+        font-size: 16px !important;
+    }
+
+
+    /* =================================================
+       DEPOSIT PRINT
+    ================================================= */
+
+    .deposit {
+
+        color: #198754 !important;
+
+        font-weight: bold !important;
+
+        font-size: 16px !important;
+
+        appearance: none !important;
+
+        -webkit-appearance: none !important;
+
+        -moz-appearance: textfield !important;
+
+        text-align: right !important;
+
+        height: auto !important;
+    }
+
+
+    .deposit::-webkit-inner-spin-button,
+    .deposit::-webkit-outer-spin-button {
+
+        display: none !important;
+
+        -webkit-appearance: none !important;
+
+        appearance: none !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* =================================================
+       WITHDRAWAL PRINT
+    ================================================= */
+
+    .withdrawal {
+
+        color: #dc3545 !important;
+
+        font-weight: bold !important;
+
+        font-size: 16px !important;
+
+        appearance: none !important;
+
+        -webkit-appearance: none !important;
+
+        -moz-appearance: textfield !important;
+
+        text-align: right !important;
+
+        height: auto !important;
+    }
+
+
+    .withdrawal::-webkit-inner-spin-button,
+    .withdrawal::-webkit-outer-spin-button {
+
+        display: none !important;
+
+        -webkit-appearance: none !important;
+
+        appearance: none !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* =================================================
+       BALANCE PRINT
+    ================================================= */
+
+    .balance-cell {
+
+        font-size: 16px !important;
+
+        font-weight: bold !important;
+
+        text-align: right !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    .balance-positive {
+
+        color: #198754 !important;
+
+        font-weight: bold !important;
+    }
+
+
+    .balance-negative {
+
+        color: #dc3545 !important;
+
+        font-weight: bold !important;
+    }
+
+
+    .balance-zero {
+
+        color: #111111 !important;
+
+        font-weight: bold !important;
+    }
+
+
+    /* =================================================
+       PRINT ROW
+    ================================================= */
+
+    tr {
+
+        page-break-inside: auto !important;
+    }
+
+}
+
+
+/* =====================================================
+   END CSS
+===================================================== */
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- =================================================
+     EDITABLE HEADING
+================================================== -->
+
+<input
+    type="text"
+    id="titleInput"
+    class="title-input"
+    value="BANK TRANSACTION REGISTER"
+    placeholder="ENTER TITLE">
+
+
+<!-- =================================================
+     TABLE
+================================================== -->
+
+<div class="table-wrapper">
+
+<table id="transactionTable">
+
+<thead>
+
+<tr>
+
+<th>SL NO.</th>
+
+<th>DATE</th>
+
+<th>BANK NAME</th>
+
+<th>DESCRIPTION</th>
+
+<th>DEPOSIT</th>
+
+<th>WITHDRAWAL</th>
+
+<th>BALANCE</th>
+
+<th>REMARKS</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tableBody">
+</tbody>
+
+
+</table>
+
+</div>
+
+
+<!-- =================================================
+     BUTTONS
+================================================== -->
+
+<div class="buttons">
+
+<button
+    type="button"
+    class="next-button"
+    onclick="nextEntry()">
+
+    + NEXT ENTRY
+
+</button>
+
+
+<button
+    type="button"
+    class="pdf-button"
+    onclick="savePDF()">
+
+    SAVE AS PDF
+
+</button>
+
+
+<button
+    type="button"
+    class="print-button"
+    onclick="printPage()">
+
+    PRINT
+
+</button>
+
+
+<button
+    type="button"
+    class="clear-button"
+    onclick="clearAll()">
+
+    CLEAR
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   BANK LIST
+   ALPHABETICAL ORDER
+===================================================== */
+
+const banks = [
+
+    "BANK OF INDIA",
+
+    "BANK OF MAHARASHTRA",
+
+    "CANARA BANK",
+
+    "PUNJAB AND SIND BANK",
+
+    "PUNJAB NATIONAL BANK",
+
+    "STATE BANK OF INDIA",
+
+    "UNION BANK OF INDIA",
+
+    "OTHER"
+
+];
+
+
+let serialNumber = 0;
+
+
+/* =====================================================
+   BANK OPTIONS
+===================================================== */
+
+function getBankOptions() {
+
+    let html =
+        '<option value="">SELECT BANK</option>';
+
+
+    banks.forEach(function(bank) {
+
+        html +=
+            '<option value="' +
+            bank +
+            '">' +
+            bank +
+            '</option>';
+
+    });
+
+
+    return html;
+}
+
+
+/* =====================================================
+   ADD ONE ROW
+===================================================== */
+
+function addRow() {
+
+    serialNumber++;
+
+
+    const tbody =
+        document.getElementById(
+            "tableBody"
+        );
+
+
+    const row =
+        document.createElement("tr");
+
+
+    row.innerHTML =
+
+    /* SL NO. */
+
+    '<td style="text-align:center; vertical-align:middle;">' +
+
+        serialNumber +
+
+    '</td>' +
+
+
+    /* DATE */
+
+    '<td style="vertical-align:middle;">' +
+
+        '<input ' +
+
+            'type="date" ' +
+
+            'class="date-input">' +
+
+        '<div class="print-date"></div>' +
+
+    '</td>' +
+
+
+    /* BANK */
+
+    '<td style="vertical-align:middle;">' +
+
+        '<select ' +
+
+            'class="bank-select">' +
+
+            getBankOptions() +
+
+        '</select>' +
+
+    '</td>' +
+
+
+    /* DESCRIPTION */
+
+    '<td style="vertical-align:middle;">' +
+
+        '<textarea ' +
+
+            'class="description-input" ' +
+
+            'rows="1">' +
+
+        '</textarea>' +
+
+        '<div class="print-text description-print"></div>' +
+
+    '</td>' +
+
+
+    /* DEPOSIT */
+
+    '<td style="vertical-align:middle;">' +
+
+        '<input ' +
+
+            'type="text" ' +
+
+            'class="deposit" ' +
+
+            'inputmode="decimal" ' +
+
+            'autocomplete="off">' +
+
+    '</td>' +
+
+
+    /* WITHDRAWAL */
+
+    '<td style="vertical-align:middle;">' +
+
+        '<input ' +
+
+            'type="text" ' +
+
+            'class="withdrawal" ' +
+
+            'inputmode="decimal" ' +
+
+            'autocomplete="off">' +
+
+    '</td>' +
+
+
+    /* BALANCE */
+
+    '<td class="balance-cell balance-zero" ' +
+
+        'style="vertical-align:middle;">' +
+
+        '0.00' +
+
+    '</td>' +
+
+
+    /* REMARKS */
+
+    '<td style="vertical-align:middle;">' +
+
+        '<textarea ' +
+
+            'class="remarks-input" ' +
+
+            'rows="1">' +
+
+        '</textarea>' +
+
+        '<div class="print-text remarks-print"></div>' +
+
+    '</td>';
+
+
+    tbody.appendChild(row);
+
+
+    setupAutoResize(
+        row.querySelector(
+            ".description-input"
+        )
+    );
+
+
+    setupAutoResize(
+        row.querySelector(
+            ".remarks-input"
+        )
+    );
+
+
+    return row;
+}
+
+
+/* =====================================================
+   TEXTAREA AUTO RESIZE
+===================================================== */
+
+function setupAutoResize(textarea) {
+
+    if (!textarea) {
+        return;
+    }
+
+
+    textarea.addEventListener(
+        "input",
+        function() {
+
+            autoResize(this);
+
+            saveData();
+
+        }
+    );
+
+
+    autoResize(textarea);
+}
+
+
+function autoResize(textarea) {
+
+    textarea.style.height = "35px";
+
+    textarea.style.height =
+        textarea.scrollHeight + "px";
+}
+
+
+/* =====================================================
+   NUMBER ONLY
+===================================================== */
+
+function allowOnlyNumber(input) {
+
+    let value = input.value;
+
+
+    value = value.replace(
+        /[^0-9.]/g,
+        ""
+    );
+
+
+    const parts =
+        value.split(".");
+
+
+    if (parts.length > 2) {
+
+        value =
+            parts[0] +
+            "." +
+            parts.slice(1).join("");
+
+    }
+
+
+    if (value.includes(".")) {
+
+        const p =
+            value.split(".");
+
+
+        value =
+            p[0] +
+            "." +
+            p[1].substring(0, 2);
+
+    }
+
+
+    input.value = value;
+}
+
+
+/* =====================================================
+   DEPOSIT / WITHDRAWAL MUTUAL EXCLUSION
+===================================================== */
+
+function controlDepositWithdrawal(input) {
+
+    const row =
+        input.closest("tr");
+
+
+    if (!row) {
+        return;
+    }
+
+
+    const deposit =
+        row.querySelector(
+            ".deposit"
+        );
+
+
+    const withdrawal =
+        row.querySelector(
+            ".withdrawal"
+        );
+
+
+    if (
+        deposit.value.trim() !== ""
+    ) {
+
+        withdrawal.disabled = true;
+
+        deposit.disabled = false;
+
+    }
+
+    else if (
+        withdrawal.value.trim() !== ""
+    ) {
+
+        deposit.disabled = true;
+
+        withdrawal.disabled = false;
+
+    }
+
+    else {
+
+        deposit.disabled = false;
+
+        withdrawal.disabled = false;
+
+    }
+}
+
+
+/* =====================================================
+   RESTORE STATE
+===================================================== */
+
+function restoreDepositWithdrawalState(row) {
+
+    const deposit =
+        row.querySelector(
+            ".deposit"
+        );
+
+
+    const withdrawal =
+        row.querySelector(
+            ".withdrawal"
+        );
+
+
+    if (
+        deposit.value.trim() !== ""
+    ) {
+
+        withdrawal.disabled = true;
+
+        deposit.disabled = false;
+
+    }
+
+    else if (
+        withdrawal.value.trim() !== ""
+    ) {
+
+        deposit.disabled = true;
+
+        withdrawal.disabled = false;
+
+    }
+
+    else {
+
+        deposit.disabled = false;
+
+        withdrawal.disabled = false;
+
+    }
+}
+
+
+/* =====================================================
+   NEXT ENTRY
+===================================================== */
+
+function nextEntry() {
+
+    const row =
+        addRow();
+
+
+    const date =
+        row.querySelector(
+            ".date-input"
+        );
+
+
+    if (date) {
+
+        date.focus();
+
+    }
+
+
+    calculateBalance();
+}
+
+
+/* =====================================================
+   CALCULATE BALANCE
+===================================================== */
+
+function calculateBalance() {
+
+    const rows =
+        document.querySelectorAll(
+            "#tableBody tr"
+        );
+
+
+    let balance = 0;
+
+
+    rows.forEach(function(row) {
+
+
+        const deposit =
+            parseFloat(
+
+                row.querySelector(
+                    ".deposit"
+                ).value
+
+            ) || 0;
+
+
+        const withdrawal =
+            parseFloat(
+
+                row.querySelector(
+                    ".withdrawal"
+                ).value
+
+            ) || 0;
+
+
+        balance =
+            balance +
+            deposit -
+            withdrawal;
+
+
+        const cell =
+            row.querySelector(
+                ".balance-cell"
+            );
+
+
+        cell.textContent =
+            balance.toFixed(2);
+
+
+        cell.classList.remove(
+
+            "balance-positive",
+
+            "balance-negative",
+
+            "balance-zero"
+
+        );
+
+
+        if (balance > 0) {
+
+            cell.classList.add(
+                "balance-positive"
+            );
+
+        }
+
+        else if (balance < 0) {
+
+            cell.classList.add(
+                "balance-negative"
+            );
+
+        }
+
+        else {
+
+            cell.classList.add(
+                "balance-zero"
+            );
+
+        }
+
+    });
+
+
+    saveData();
+}
+
+
+/* =====================================================
+   PREPARE PRINT DATA
+===================================================== */
+
+function preparePrintData() {
+
+    const rows =
+        document.querySelectorAll(
+            "#tableBody tr"
+        );
+
+
+    rows.forEach(function(row) {
+
+
+        /* DATE */
+
+        const date =
+            row.querySelector(
+                ".date-input"
+            );
+
+
+        const printDate =
+            row.querySelector(
+                ".print-date"
+            );
+
+
+        if (
+            date &&
+            printDate
+        ) {
+
+            if (date.value) {
+
+                const parts =
+                    date.value.split("-");
+
+
+                if (
+                    parts.length === 3
+                ) {
+
+                    printDate.textContent =
+
+                        parts[2] +
+                        "-" +
+                        parts[1] +
+                        "-" +
+                        parts[0];
+
+                }
+
+                else {
+
+                    printDate.textContent =
+                        date.value;
+
+                }
+
+            }
+
+            else {
+
+                printDate.textContent = "";
+
+            }
+
+        }
+
+
+        /* DESCRIPTION */
+
+        const description =
+            row.querySelector(
+                ".description-input"
+            );
+
+
+        const descriptionPrint =
+            row.querySelector(
+                ".description-print"
+            );
+
+
+        if (
+            description &&
+            descriptionPrint
+        ) {
+
+            descriptionPrint.textContent =
+                description.value || "";
+
+        }
+
+
+        /* REMARKS */
+
+        const remarks =
+            row.querySelector(
+                ".remarks-input"
+            );
+
+
+        const remarksPrint =
+            row.querySelector(
+                ".remarks-print"
+            );
+
+
+        if (
+            remarks &&
+            remarksPrint
+        ) {
+
+            remarksPrint.textContent =
+                remarks.value || "";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveData() {
+
+    const rows =
+        document.querySelectorAll(
+            "#tableBody tr"
+        );
+
+
+    const data = [];
+
+
+    rows.forEach(function(row) {
+
+        data.push({
+
+            date:
+                row.querySelector(
+                    ".date-input"
+                ).value,
+
+
+            bank:
+                row.querySelector(
+                    ".bank-select"
+                ).value,
+
+
+            description:
+                row.querySelector(
+                    ".description-input"
+                ).value,
+
+
+            deposit:
+                row.querySelector(
+                    ".deposit"
+                ).value,
+
+
+            withdrawal:
+                row.querySelector(
+                    ".withdrawal"
+                ).value,
+
+
+            remarks:
+                row.querySelector(
+                    ".remarks-input"
+                ).value
+
+        });
+
+    });
+
+
+    const title =
+        document.getElementById(
+            "titleInput"
+        ).value;
+
+
+    localStorage.setItem(
+
+        "bankRegisterData",
+
+        JSON.stringify(data)
+
+    );
+
+
+    localStorage.setItem(
+
+        "bankRegisterTitle",
+
+        title
+
+    );
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData() {
+
+    const saved =
+        localStorage.getItem(
+            "bankRegisterData"
+        );
+
+
+    const savedTitle =
+        localStorage.getItem(
+            "bankRegisterTitle"
+        );
+
+
+    if (savedTitle !== null) {
+
+        document.getElementById(
+            "titleInput"
+        ).value =
+            savedTitle;
+
+    }
+
+
+    if (!saved) {
+
+        addRow();
+
+        return;
+    }
+
+
+    try {
+
+        const data =
+            JSON.parse(saved);
+
+
+        if (
+
+            !Array.isArray(data) ||
+
+            data.length === 0
+
+        ) {
+
+            addRow();
+
+            return;
+        }
+
+
+        data.forEach(function(item) {
+
+
+            const row =
+                addRow();
+
+
+            row.querySelector(
+                ".date-input"
+            ).value =
+                item.date || "";
+
+
+            row.querySelector(
+                ".bank-select"
+            ).value =
+                item.bank || "";
+
+
+            row.querySelector(
+                ".description-input"
+            ).value =
+                item.description || "";
+
+
+            row.querySelector(
+                ".deposit"
+            ).value =
+                item.deposit || "";
+
+
+            row.querySelector(
+                ".withdrawal"
+            ).value =
+                item.withdrawal || "";
+
+
+            row.querySelector(
+                ".remarks-input"
+            ).value =
+                item.remarks || "";
+
+
+            autoResize(
+
+                row.querySelector(
+                    ".description-input"
+                )
+
+            );
+
+
+            autoResize(
+
+                row.querySelector(
+                    ".remarks-input"
+                )
+
+            );
+
+
+            restoreDepositWithdrawalState(
+                row
+            );
+
+        });
+
+
+        calculateBalance();
+
+    }
+
+    catch(error) {
+
+        console.log(
+            "Load error:",
+            error
+        );
+
+
+        localStorage.removeItem(
+            "bankRegisterData"
+        );
+
+
+        document.getElementById(
+            "tableBody"
+        ).innerHTML = "";
+
+
+        serialNumber = 0;
+
+
+        addRow();
+
+    }
+
+}
+
+
+/* =====================================================
+   INPUT EVENT
+===================================================== */
+
+document.addEventListener(
+
+    "input",
+
+    function(event) {
+
+
+        /* DEPOSIT */
+
+        if (
+
+            event.target.classList.contains(
+                "deposit"
+            )
+
+        ) {
+
+            allowOnlyNumber(
+                event.target
+            );
+
+
+            controlDepositWithdrawal(
+                event.target
+            );
+
+
+            calculateBalance();
+
+
+            return;
+
+        }
+
+
+        /* WITHDRAWAL */
+
+        if (
+
+            event.target.classList.contains(
+                "withdrawal"
+            )
+
+        ) {
+
+            allowOnlyNumber(
+                event.target
+            );
+
+
+            controlDepositWithdrawal(
+                event.target
+            );
+
+
+            calculateBalance();
+
+
+            return;
+
+        }
+
+
+        /* TITLE */
+
+        if (
+
+            event.target.id ===
+            "titleInput"
+
+        ) {
+
+            saveData();
+
+            return;
+
+        }
+
+
+        saveData();
+
+    }
+
+);
+
+
+/* =====================================================
+   CHANGE EVENT
+===================================================== */
+
+document.addEventListener(
+
+    "change",
+
+    function(event) {
+
+
+        if (
+
+            event.target.classList.contains(
+                "bank-select"
+            )
+
+        ) {
+
+            saveData();
+
+        }
+
+
+        if (
+
+            event.target.classList.contains(
+                "date-input"
+            )
+
+        ) {
+
+            saveData();
+
+        }
+
+    }
+
+);
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+function printPage() {
+
+    calculateBalance();
+
+    preparePrintData();
+
+
+    setTimeout(function() {
+
+        window.print();
+
+    }, 150);
+
+}
+
+
+/* =====================================================
+   SAVE AS PDF
+===================================================== */
+
+function savePDF() {
+
+    calculateBalance();
+
+    preparePrintData();
+
+
+    setTimeout(function() {
+
+        window.print();
+
+    }, 150);
+
+}
+
+
+/* =====================================================
+   AFTER PRINT
+===================================================== */
+
+window.addEventListener(
+
+    "afterprint",
+
+    function() {
+
+
+        const textareas =
+            document.querySelectorAll(
+                ".description-input, .remarks-input"
+            );
+
+
+        textareas.forEach(function(textarea) {
+
+            autoResize(textarea);
+
+        });
+
+    }
+
+);
+
+
+/* =====================================================
+   CLEAR ALL
+===================================================== */
+
+function clearAll() {
+
+    const answer =
+
+        confirm(
+            "KYA AAP SAARA DATA CLEAR KARNA CHAHTE HAIN?"
+        );
+
+
+    if (!answer) {
+
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "bankRegisterData"
+    );
+
+
+    document.getElementById(
+        "tableBody"
+    ).innerHTML = "";
+
+
+    serialNumber = 0;
+
+
+    /* Only one row after clear */
+
+    addRow();
+
+
+    calculateBalance();
+
+}
+
+
+/* =====================================================
+   START APPLICATION
+===================================================== */
+
+window.addEventListener(
+
+    "load",
+
+    function() {
+
+        loadData();
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
